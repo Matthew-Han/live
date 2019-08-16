@@ -92,7 +92,9 @@ public enum HttpCodeEnum {
 
     SERVER_ERROR_CONNECT(1002,"服务连接失败"),
 
-    ERROR_JOIN_ROOM(1003,"登陆房间失败 [ %d ] ")
+    ERROR_JOIN_ROOM(1003,"登陆房间失败 [ %d ] "),
+
+    ERROR_LOROUT_SERVER(1004,"登出房间失败"),
     ;
 
 

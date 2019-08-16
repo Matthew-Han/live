@@ -33,6 +33,7 @@
         <java.version>1.8</java.version>
         <io.springfox.version>2.6.1</io.springfox.version>
         <om.github.pagehelper.version>5.1.5</om.github.pagehelper.version>
+        <com.yycdev.version>1.0.0</com.yycdev.version>
     </properties>
 
     <dependencies>
@@ -104,6 +105,11 @@
             <version>${om.github.pagehelper.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.yycdev</groupId>
+            <artifactId>douyu-sdk</artifactId>
+            <version>${com.yycdev.version}</version>
+        </dependency>
 
     </dependencies>
 

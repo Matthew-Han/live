@@ -7,16 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.yuanmo.live.bulletscreen.base.BaseResult;
 import xyz.yuanmo.live.bulletscreen.enums.HttpCodeEnum;
 import xyz.yuanmo.live.bulletscreen.exception.MatthewHanException;
-import xyz.yuanmo.live.bulletscreen.service.DouYuClientService;
+import xyz.yuanmo.live.bulletscreen.service.ClientConnectService;
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import static xyz.yuanmo.live.bulletscreen.consts.ServerConst.DY_HOST;
 import static xyz.yuanmo.live.bulletscreen.consts.ServerConst.DY_PORT;
 
 /**
- * @ClassName ClientController
+ * @ClassName ClientConnectController
  * @Description TODO
  * @Author MatthewHan
  * @Date 2019-08-15 15:39
@@ -24,10 +23,10 @@ import static xyz.yuanmo.live.bulletscreen.consts.ServerConst.DY_PORT;
  **/
 @RestController
 @RequestMapping("/server")
-public class ClientController {
+public class ClientConnectController {
 
     @Resource
-    private DouYuClientService douYuClientService;
+    private ClientConnectService clientConnectService;
 
     /**
      * 连接弹幕服务器
@@ -37,9 +36,9 @@ public class ClientController {
     @PostMapping("/connect")
     public BaseResult<Map<String, Object>> connect() {
         BaseResult<Map<String, Object>> result = new BaseResult<>();
-        Map<String, Object> map = new HashMap<>(4);
+        Map<String, Object> map;
         try {
-            map = douYuClientService.connectServer(DY_HOST,DY_PORT);
+            map = clientConnectService.connectServer(DY_HOST,DY_PORT);
         } catch (IOException e) {
             throw new MatthewHanException(HttpCodeEnum.SERVER_ERROR_CONNECT.getCode(), e.toString());
         }
@@ -47,16 +46,27 @@ public class ClientController {
         return result;
     }
 
-    @PostMapping("/setRoomId/{roomId}")
+    @PostMapping("/joinRoom/{roomId}")
     public BaseResult<Map<String, Object>> setRoomId(@PathVariable("roomId") Integer roomId) {
         BaseResult<Map<String, Object>> result = new BaseResult<>();
-        Map<String, Object> map = new HashMap<>(4);
+        Map<String, Object> map;
         try {
-            map = douYuClientService.setRoomId(roomId);
+            map = clientConnectService.joinRoom(roomId);
         } catch (IOException e) {
             throw new MatthewHanException(HttpCodeEnum.ERROR_JOIN_ROOM.getCode(), e.toString());
         }
         result.setData(map);
         return result;
+    }
+
+
+    @PostMapping("/close")
+    public BaseResult logout(){
+        try {
+            clientConnectService.logout();
+        } catch (IOException e) {
+            throw new MatthewHanException(HttpCodeEnum.ERROR_LOROUT_SERVER.getCode(), e.toString());
+        }
+        return new BaseResult();
     }
 }

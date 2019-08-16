@@ -19,7 +19,7 @@ public class MsgTypeReqConst {
      * 心跳消息
      * 固定格式
      */
-    public static final String KEEP_LIVE = "type@=mrkl/";
+    public static final String KEEP_ALIVE = "type@=mrkl/";
 
     /**
      * 该消息用于完成加入房间分组，rid就是roomId，完整的数据部分应包含的字段如下
@@ -32,5 +32,10 @@ public class MsgTypeReqConst {
      * 表示为登出消息，固定为logout
      */
     public static final String LOGOUT_MESSAGE = "type@=logout/";
+
+    /**
+     * 海量弹幕模式
+     */
+    public static final String FULL_SCREEN = "-9999";
 
 }

@@ -13,7 +13,7 @@ public class MsgTypeRespConst {
     public static final String LOGIN_RES = "loginres";
 
     /** 服务心跳响应， */
-    public static final String KEEP_LIVE = "loginres";
+    public static final String KEEP_ALIVE = "loginres";
 
     /** 弹幕消息 */
     public static final String CHAT_MSG = "chatmsg";
